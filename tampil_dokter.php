@@ -18,7 +18,7 @@ $result = $conn->query($sql);
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f4f4f4;
         }
         table {
