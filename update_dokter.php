@@ -4,6 +4,18 @@ include 'config.php';
 // Memeriksa apakah parameter 'id' ada di URL
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+
+
+    // Mengambil data dokter berdasarkan ID
+    $sql = "SELECT * FROM doctors WHERE id_dokter = '$id'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+    } else {
+        echo "Dokter tidak ditemukan";
+        exit();
+    }
 }
 ?>
 
