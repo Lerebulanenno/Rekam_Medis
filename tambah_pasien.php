@@ -169,6 +169,7 @@
             </div>
             <div class="form-group">
                 <button type="submit" class="btn"><i class="fas fa-plus"></i> Tambah Data Pasien</button>
+                <button type="submit" class="btn"><i class="fas fa-plus"></i>Kembali</button>
             </div>
         </form>
     </div>
