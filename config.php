@@ -3,7 +3,7 @@
 $servername = "localhost"; // Nama server database (localhost jika server database berada di mesin yang sama)
 $username = "root";        // Username untuk mengakses database
 $password = "";            // Password untuk username yang diberikan
-$dbname = "db_rekammedis"; // Nama database yang akan digunakan
+$dbname = "rekammedis"; // Nama database yang akan digunakan
 
 // Membuat koneksi ke database menggunakan objek mysqli
 $conn = new mysqli($servername, $username, $password, $dbname);
