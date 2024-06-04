@@ -4,6 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rekam Medis</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 20px;
+        }
+
+        .navbar {
+            background-color: #f8f9fa;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .navbar-nav {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .nav-item {
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .nav-link:hover {
+            background-color: #ddd;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 10px;
+            }
+
+            .nav-item {
+                margin-right: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
    
