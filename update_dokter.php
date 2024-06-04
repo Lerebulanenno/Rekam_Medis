@@ -1,3 +1,12 @@
+<?php
+include 'config.php';
+
+// Memeriksa apakah parameter 'id' ada di URL
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+}
+?>
+
 <!-- menampilkan form -->
 <!DOCTYPE html>
 <html lang="en">
