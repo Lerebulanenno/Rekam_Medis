@@ -61,9 +61,11 @@
         }
         .btn-edit {
             background-color: #FFC107;
+
         }
         .btn-delete {
             background-color: #DC3545;
+            margin-left: 5px;
         }
         .btn i {
             margin-right: 5px;
