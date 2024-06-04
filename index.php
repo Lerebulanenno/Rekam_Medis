@@ -61,19 +61,19 @@
 <nav class="navbar navbar-primary-sm bg-light">
   <ul class="navbar-nav">
     <li class="nav-item active">
-      <a class="nav-link" href="#">Home</a>
+      <a class="nav-link" href="index.php">Home</a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" href="#">Pasien</a>
+      <a class="nav-link" href="?page=pasien">Pasien</a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" href="#">Dokter</a>
+      <a class="nav-link" href="?page=dokter">Dokter</a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" href="#">Kunjungan</a>
+      <a class="nav-link" href="?page=kunjungan">Kunjungan</a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link" href="#">Rekam Medis</a>
+      <a class="nav-link" href="?page=rekam_medis">Rekam Medis</a>
     </li>
   </ul>
 </nav>
