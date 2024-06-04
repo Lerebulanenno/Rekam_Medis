@@ -103,7 +103,7 @@
                     echo "<td>" . $row["telepon"] . "</td>"; // Menampilkan telepon
                     echo "<td>";
                     // Tombol edit dengan ikon edit
-                    echo "<a href='edit_pasien.php?id=" . $row["id"] . "' class='btn btn-edit'><i class='fas fa-edit'></i> Edit</a>";
+                    echo "<a href='update_pasien.php?id=" . $row["id"] . "' class='btn btn-edit'><i class='fas fa-edit'></i> Edit</a>";
                     // Tombol hapus dengan ikon delete dan konfirmasi JavaScript
                     echo "<a href='hapus_pasien.php?id=" . $row["id"] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'><i class='fas fa-trash'></i> Hapus</a>";
                     echo "</td>";

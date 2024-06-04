@@ -101,8 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "<td>" . $row["alamat"] . "</td>";
                     echo "<td>" . $row["telepon"] . "</td>";
                     echo "<td>";
-                    echo "<a href='edit_pasien.php?id=" . $row["id_pasien"] . "' class='btn btn-edit'>Edit</a> ";
-                    echo "<a href='hapus_pasien.php?id=" . $row["id_pasien"] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'>Hapus</a>";
+                    echo "<a href='edit_rekammedis.php?id=" . $row["id_rekammedis"] . "' class='btn btn-edit'>Edit</a> ";
+                    echo "<a href='hapus_rekammedis.php?id=" . $row["id_rekammedis"] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'>Hapus</a>";
                     echo "</td>";
                     echo "</tr>";
                 }
