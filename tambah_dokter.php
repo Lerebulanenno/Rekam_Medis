@@ -1,3 +1,12 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Mengambil data dari form
+    $nama = $_POST["nama"];
+    $spesialisasi = $_POST["spesialisasi"];
+    $telepon = $_POST["telepon"];
+}
+?>
+
 <!-- menampilkan form manambah data dokter -->
 <!DOCTYPE html>
 <html lang="en">
