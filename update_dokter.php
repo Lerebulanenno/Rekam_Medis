@@ -25,6 +25,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $spesialisasi = $_POST["spesialisasi"];
     $telepon = $_POST["telepon"];
 
+
+    // Update data dokter
+    $sql = "UPDATE doctors SET nama='$nama', spesialisasi='$spesialisasi', telepon='$telepon' WHERE id_dokter='$id'";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data dokter berhasil diperbarui";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+
 }
 ?>
 
