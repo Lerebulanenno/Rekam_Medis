@@ -15,12 +15,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Pasien</title>
+    <!-- Sertakan Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-bmI1jZx7I25zB0wq0TsNuK3InxWYFnbV1KRNp5C9ZVPHR0d4z8jk83QlVt4e53D7rkx2t3YtwUesJx86u4o5Cg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         /* Gaya CSS Anda */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f4f4f4;
         }
         table {
@@ -49,10 +52,12 @@
             padding: 5px 10px;
             text-decoration: none;
             color: #fff;
-            background-color: #007BFF;
             border-radius: 3px;
             display: inline-block;
             margin-bottom: 5px;
+        }
+        .btn-info {
+            background-color: #17A2B8;
         }
         .btn-edit {
             background-color: #FFC107;
@@ -60,12 +65,17 @@
         .btn-delete {
             background-color: #DC3545;
         }
-    </style>
+        .btn i {
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
     <h2>Data Pasien</h2>
+    <!-- Tombol untuk tambah data pasien -->
     <a href="tambah_pasien.php" class="btn btn-info"><i class="fas fa-plus"></i> Tambah Data Pasien</a>
+
+    <!-- Tabel untuk menampilkan data pasien -->
     <table>
         <thead>
             <tr>
@@ -92,8 +102,10 @@
                     echo "<td>" . $row["alamat"] . "</td>"; // Menampilkan alamat
                     echo "<td>" . $row["telepon"] . "</td>"; // Menampilkan telepon
                     echo "<td>";
-                    echo "<a href='edit_pasien.php?id=" . $row["id"] . "' class='btn btn-edit'><i class='fas fa-edit'></i> Edit</a> ";
-                    echo "<a href='hapus_pasien.php?id=" . $row["id"] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'><i class='fas fa-window-close'></i> Hapus</a>";
+                    // Tombol edit dengan ikon edit
+                    echo "<a href='edit_pasien.php?id=" . $row["id"] . "' class='btn btn-edit'><i class='fas fa-edit'></i> Edit</a>";
+                    // Tombol hapus dengan ikon delete dan konfirmasi JavaScript
+                    echo "<a href='hapus_pasien.php?id=" . $row["id"] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'><i class='fas fa-trash'></i> Hapus</a>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -104,6 +116,7 @@
             ?>
         </tbody>
     </table>
+
     <?php
         // Menutup koneksi database setelah selesai menggunakan hasil query
         $conn->close();
