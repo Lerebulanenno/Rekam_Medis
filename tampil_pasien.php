@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 
-$sql = "SELECT id_pasien, nama, `tanggal lahir`, `jenis kelamin`, alamat, telepon FROM pasien";
+$sql = "SELECT id, nama, `tanggal_lahir`, `jenis_kelamin`, alamat, telepon FROM patients";
 $result = $conn->query($sql);
 ?>
 
@@ -75,10 +75,10 @@ $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . $row["id_pasien"] . "</td>";
+                    echo "<td>" . $row["id"] . "</td>";
                     echo "<td>" . $row["nama"] . "</td>";
-                    echo "<td>" . $row["tanggal lahir"] . "</td>"; // Kolom ini harus diubah menjadi 'tanggal_lahir'
-                    echo "<td>" . $row["jenis kelamin"] . "</td>";
+                    echo "<td>" . $row["tanggal_lahir"] . "</td>"; // Kolom ini harus diubah menjadi 'tanggal_lahir'
+                    echo "<td>" . $row["jenis_kelamin"] . "</td>";
                     echo "<td>" . $row["alamat"] . "</td>";
                     echo "<td>" . $row["telepon"] . "</td>";
                     echo "<td>";

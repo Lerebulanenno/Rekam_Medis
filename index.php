@@ -120,7 +120,7 @@
         }
     }elseif ($page=="rekam_medis"){ 
         if ($action==""){
-            include "tampil_rekam_medis.php";
+            include "tampil_rekammedis.php";
         }else{
             include "hasil_rekam_medis.php";
         }
