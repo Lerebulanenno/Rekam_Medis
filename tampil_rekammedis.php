@@ -31,53 +31,87 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <title>Tambah Rekam Medis</title>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 50%;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
         }
-        table, th, td {
-            border: 1px solid black;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
         }
         th, td {
-            padding: 8px;
+            padding: 10px;
+            border: 1px solid #ddd;
             text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        .btn {
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007BFF;
+            border-radius: 3px;
+        }
+        .btn-edit {
+            background-color: #FFC107;
+        }
+        .btn-delete {
+            background-color: #DC3545;
         }
     </style>
 </head>
 <body>
 
 <h2>Tambah Rekam Medis</h2>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+<a href="tambah_pasien.php" class="btn"><i class="fas fa-plus"></i>Tambah Data Pasien</a>
     <table>
-        <tr>
-            <td>ID Rekam Medis:</td>
-            <td><input type="number" name="id_rekammedis" required></td>
-        </tr>
-        <tr>
-            <td>ID Kunjungan:</td>
-            <td><input type="number" name="id_kunjungan" required></td>
-        </tr>
-        <tr>
-            <td>Diagnosa:</td>
-            <td><textarea name="diagnosa" required></textarea></td>
-        </tr>
-        <tr>
-            <td>Perawatan:</td>
-            <td><textarea name="perawatan" required></textarea></td>
-        </tr>
-        <tr>
-            <td>Resep:</td>
-            <td><textarea name="resep" required></textarea></td>
-        </tr>
-        <tr>
-            <td>Catatan:</td>
-            <td><textarea name="catatan" required></textarea></td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align:center;"><input type="submit" value="Submit"></td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Id Rekam Medis</th>
+                <th>Id Kunjungan</th>
+                <th>Diagnosa</th>
+                <th>Perawatan</th>
+                <th>Resep</th>
+                <th>Catatan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row["id"] . "</td>";
+                    echo "<td>" . $row["nama"] . "</td>";
+                    echo "<td>" . $row["tanggal_lahir"] . "</td>"; // Kolom ini harus diubah menjadi 'tanggal_lahir'
+                    echo "<td>" . $row["jenis_kelamin"] . "</td>";
+                    echo "<td>" . $row["alamat"] . "</td>";
+                    echo "<td>" . $row["telepon"] . "</td>";
+                    echo "<td>";
+                    echo "<a href='edit_pasien.php?id=" . $row["id_pasien"] . "' class='btn btn-edit'>Edit</a> ";
+                    echo "<a href='hapus_pasien.php?id=" . $row["id_pasien"] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'>Hapus</a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='7'>Tidak ada data</td></tr>";
+            }
+            ?>
+        </tbody>
     </table>
-</form>
-
+    <?php $conn->close(); ?>
 </body>
 </html>
