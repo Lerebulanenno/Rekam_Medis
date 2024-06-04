@@ -3,17 +3,17 @@ include 'config.php'; // Pastikan file config.php berisi informasi koneksi datab
 
 // Mengecek apakah terdapat request POST untuk menambahkan data rekam medis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id_rekammedis = $_POST["id_rekammedis"];
-    $id_kunjungan = $_POST["id_kunjungan"];
+    $id = $_POST["id"];
+    $id_kunjungan = $_POST["kunjungan_id"];
     $diagnosa = $_POST["diagnosa"];
     $perawatan = $_POST["perawatan"];
     $resep = $_POST["resep"];
     $catatan = $_POST["catatan"];
 
     // Menggunakan prepared statement untuk menambahkan data rekam medis
-    $sql = "INSERT INTO rekammedis (id_rekammedis, id_kunjungan, diagnosa, perawatan, resep, catatan) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO rekammedis (id, kunjungan_id, diagnosa, perawatan, resep, catatan) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iissss", $id_rekammedis, $id_kunjungan, $diagnosa, $perawatan, $resep, $catatan);
+    $stmt->bind_param("iissss", $id, $id_kunjungan, $diagnosa, $perawatan, $resep, $catatan);
 
     if ($stmt->execute()) {
         echo "Rekam medis berhasil ditambahkan";
@@ -24,8 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 }
 
-// Menampilkan formulir tambah rekam medis dalam bentuk tabel samping
+// Query untuk mengambil data rekam medis
+$sql = "SELECT id, kunjungan_id, diagnosa, perawatan, resep, catatan FROM medical_records";
+$result = $conn->query($sql);
+
+// Periksa apakah query berhasil dijalankan
+if ($result === false) {
+    die("Error: " . $conn->error);
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <h2>Tambah Rekam Medis</h2>
-<a href="tambah_pasien.php" class="btn"><i class="fas fa-plus"></i>Tambah Data Pasien</a>
+<a href="tambah_rekammedis.php" class="btn"><i class="fas fa-plus"></i>Tambah Rekam</a>
     <table>
         <thead>
             <tr>
@@ -95,14 +103,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>" . $row["id"] . "</td>";
-                    echo "<td>" . $row["nama"] . "</td>";
-                    echo "<td>" . $row["tanggal_lahir"] . "</td>"; // Kolom ini harus diubah menjadi 'tanggal_lahir'
-                    echo "<td>" . $row["jenis_kelamin"] . "</td>";
-                    echo "<td>" . $row["alamat"] . "</td>";
-                    echo "<td>" . $row["telepon"] . "</td>";
+                    echo "<td>" . $row["kunjungan_id"] . "</td>";
+                    echo "<td>" . $row["diagnosa"] . "</td>"; 
+                    echo "<td>" . $row["perawatan"] . "</td>";
+                    echo "<td>" . $row["resep"] . "</td>";
+                    echo "<td>" . $row["catatan"] . "</td>";
                     echo "<td>";
-                    echo "<a href='edit_rekammedis.php?id=" . $row["id_rekammedis"] . "' class='btn btn-edit'>Edit</a> ";
-                    echo "<a href='hapus_rekammedis.php?id=" . $row["id_rekammedis"] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'>Hapus</a>";
+                    echo "<a href='edit_rekammedis.php?id=" . $row["id"] . "' class='btn btn-edit'>Edit</a> ";
+                    echo "<a href='hapus_rekammedis.php?id=" . $row["id"] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'>Hapus</a>";
                     echo "</td>";
                     echo "</tr>";
                 }
