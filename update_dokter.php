@@ -17,6 +17,15 @@ if (isset($_GET['id'])) {
         exit();
     }
 }
+
+// Memeriksa apakah form telah disubmit
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = $_POST["id"];
+    $nama = $_POST["nama"];
+    $spesialisasi = $_POST["spesialisasi"];
+    $telepon = $_POST["telepon"];
+
+}
 ?>
 
 <!-- menampilkan form -->
