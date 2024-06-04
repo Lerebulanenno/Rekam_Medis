@@ -4,6 +4,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nama = $_POST["nama"];
     $spesialisasi = $_POST["spesialisasi"];
     $telepon = $_POST["telepon"];
+
+    // Menambahkan data dokter ke database
+    $sql = "INSERT INTO doctors (nama, spesialisasi, telepon) VALUES ('$nama', '$spesialisasi', '$telepon')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data dokter berhasil ditambahkan";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $conn->close();
 }
 ?>
 
