@@ -44,11 +44,14 @@ $result = $conn->query($sql);
             text-align: center;
         }
         .btn {
+            margin-bottom: 5px;
             padding: 5px 10px;
             text-decoration: none;
             color: #fff;
             background-color: #007BFF;
             border-radius: 3px;
+            display: inline-block;
+            
         }
         .btn-edit {
             background-color: #FFC107;
