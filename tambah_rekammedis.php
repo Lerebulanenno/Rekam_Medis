@@ -50,7 +50,7 @@
             
             if ($stmt = $conn->prepare($sql_insert)) {
                 // Bind parameter ke statement
-                $stmt->bind_param("iissss", $id, $id_kunjungan, $diagnosa, $perawatan, $resep, $catatan);
+                $stmt->bind_param("issss",  $id_kunjungan, $diagnosa, $perawatan, $resep, $catatan);
                 
                 // Eksekusi statement
                 if ($stmt->execute()) {
