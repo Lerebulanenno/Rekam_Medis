@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
 
 
     // Mengambil data dokter berdasarkan ID
-    $sql = "SELECT * FROM doctors WHERE id_dokter = '$id'";
+    $sql = "SELECT * FROM doctors WHERE id = '$id'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Update data dokter
-    $sql = "UPDATE doctors SET nama='$nama', spesialisasi='$spesialisasi', telepon='$telepon' WHERE id_dokter='$id'";
+    $sql = "UPDATE doctors SET nama='$nama', spesialisasi='$spesialisasi', telepon='$telepon' WHERE id='$id'";
 
     if ($conn->query($sql) === TRUE) {
         echo "Data dokter berhasil diperbarui";
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <h2>Update Data Dokter</h2>
         <form action="update_dokter.php" method="post">
-            <input type="hidden" name="id" value="<?php echo $row['id_dokter']; ?>">
+            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
 
             <label for="nama">Nama:</label>
             <input type="text" id="nama" name="nama" value="<?php echo $row['nama']; ?>" required>
