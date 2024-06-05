@@ -12,39 +12,49 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f4f4f4;
         }
         .container {
             max-width: 800px;
             margin: auto;
+            margin-top: 20px;
             background-color: #fff;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden; /* Menambahkan overflow: hidden untuk clear floats */
         }
         h1 {
             color: #333;
             text-align: center;
+            margin-bottom: 20px;
         }
-        p {
-            font-size: 16px;
-            line-height: 1.6;
+        .intro {
             text-align: center;
+            margin-bottom: 30px;
+        }
+        .intro p {
+            font-size: 18px;
+            line-height: 1.6;
         }
         .features {
-            margin-top: 20px;
             display: flex;
-            justify-content: space-around;
             flex-wrap: wrap;
+            justify-content: space-between;
         }
         .feature {
-            width: 45%;
+            width: calc(33.33% - 20px);
             padding: 20px;
             margin-bottom: 20px;
             background-color: #f9f9f9;
             border-radius: 5px;
             box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease; /* Efek transisi ketika hover */
+        }
+        .feature:hover {
+            transform: translateY(-5px); /* Menggeser sedikit ke atas saat hover */
         }
         .feature h3 {
             color: #007BFF;
@@ -70,12 +80,25 @@
         .btn i {
             margin-right: 5px;
         }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer a {
+            color: #333;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Selamat Datang di Sistem Informasi Kesehatan</h1>
-        <p>Di sini Anda dapat mengelola informasi terkait pasien, dokter, kunjungan, dan rekam medis dengan mudah dan efisien.</p>
+        <div class="intro">
+            <p>Di sini Anda dapat mengelola informasi terkait pasien, dokter, kunjungan, dan rekam medis dengan mudah dan efisien.</p>
+        </div>
 
         <div class="features">
             <div class="feature">
@@ -100,8 +123,8 @@
             </div>
         </div>
 
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="logout.php" class="btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <div class="footer">
+            <p>© 2024 Sistem Informasi Kesehatan. All rights reserved.<p>
         </div>
     </div>
 </body>
