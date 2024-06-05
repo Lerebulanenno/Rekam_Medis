@@ -2,59 +2,62 @@
     // Include file konfigurasi untuk koneksi ke database
     include 'config.php';
 
-    // Inisialisasi variabel untuk nilai default
+    // Inisialisasi variabel
     $kunjungan_id = $diagnosa = $perawatan = $resep = $catatan = '';
     $kunjungan_id_err = $diagnosa_err = $perawatan_err = $resep_err = $catatan_err = '';
+    
+    // Mendapatkan ID pasien dari parameter URL
+    $id = $_GET["id"];
 
     // Jika form disubmit
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Validasi nama
         if (empty(trim($_POST["kunjungan_id"]))) {
-            $kunjungan_id_err = "kunjungan harus diisi";
+            $nama_err = "Kunjungan pasien harus diisi";
         } else {
-            $kunjungan_id = trim($_POST["kunjungan_id"]);
+            $nama = trim($_POST["kunjungan"]);
         }
 
         // Validasi tanggal lahir
         if (empty(trim($_POST["diagnosa"]))) {
-            $diagnosa_err = "diagnosa harus diisi";
+            $tanggal_lahir_err = "diagnosa harus diisi";
         } else {
-            $diagnosa = trim($_POST["diagnosa"]);
+            $tanggal_lahir = trim($_POST["diagnosa"]);
         }
 
         // Validasi jenis kelamin
         if (empty(trim($_POST["perawatan"]))) {
-            $perawatan_err = "perawatan harus dipilih";
+            $jenis_kelamin_err = "perawatan harus diisi";
         } else {
-            $perawatan = trim($_POST["perawatan"]);
+            $jenis_kelamin = trim($_POST["perawatan"]);
         }
 
         // Validasi alamat
         if (empty(trim($_POST["resep"]))) {
-            $resep_err = "resep harus diisi";
+            $alamat_err = "resep harus diisi";
         } else {
-            $resep = trim($_POST["resep"]);
+            $alamat = trim($_POST["resep"]);
         }
 
         // Validasi telepon
         if (empty(trim($_POST["catatan"]))) {
-            $catatan_err = "catatan harus diisi";
+            $telepon_err = "catatan harus diisi";
         } else {
-            $catatan = trim($_POST["catatan"]);
+            $telepon = trim($_POST["catatan"]);
         }
 
-        // Jika tidak ada error validasi, tambahkan data ke database
+        // Jika tidak ada error validasi, update data ke database
         if (empty($kunjungan_id_err) && empty($diagnosa_err) && empty($perawatan_err) && empty($resep_err) && empty($catatan_err)) {
             // Prepare statement
-            $sql_insert = "INSERT INTO medical_records (kunjungan_id, diagnosa, perawatan, resep, catatan) VALUES (?, ?, ?, ?, ?)";
+            $sql_update = "UPDATE medical_records SET kunjungan_id=?, diagnosa=?, perawatan=?, resep=?, catatan=? WHERE id=?";
             
-            if ($stmt = $conn->prepare($sql_insert)) {
+            if ($stmt = $conn->prepare($sql_update)) {
                 // Bind parameter ke statement
                 $stmt->bind_param("iissss", $id, $id_kunjungan, $diagnosa, $perawatan, $resep, $catatan);
                 
                 // Eksekusi statement
                 if ($stmt->execute()) {
-                    // Redirect ke halaman data pasien setelah berhasil tambah data
+                    // Redirect ke halaman tampil_pasien.php setelah berhasil update data
                     header("location: tampil_rekammedis.php");
                     exit();
                 } else {
@@ -68,6 +71,38 @@
         
         // Tutup koneksi database
         $conn->close();
+    } else {
+        // Query untuk mengambil data pasien berdasarkan ID
+        $sql_select = "SELECT id, kunjungan_id, diagnosa, perawatan, resep, catatan FROM medical_records WHERE id=?";
+        
+        if ($stmt = $conn->prepare($sql_select)) {
+            // Bind parameter ke statement
+            $stmt->bind_param("i", $id);
+            
+            // Eksekusi statement
+            if ($stmt->execute()) {
+                // Simpan hasil query dalam variabel
+                $stmt->store_result();
+                
+                // Jika ditemukan data, ambil nilai kolom dan masukkan ke variabel
+                if ($stmt->num_rows == 1) {
+                    $stmt->bind_result($id, $id_kunjungan, $diagnosa, $perawatan, $resep, $catatan);
+                    $stmt->fetch();
+                } else {
+                    // Redirect ke halaman tampil_pasien.php jika data tidak ditemukan
+                    header("location: tampil_rekammedis.php");
+                    exit();
+                }
+            } else {
+                echo "Terjadi kesalahan. Silakan coba lagi nanti.";
+            }
+            
+            // Tutup statement
+            $stmt->close();
+        }
+        
+        // Tutup koneksi database
+        $conn->close();
     }
 ?>
 
@@ -76,7 +111,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Data Rekam Medis</title>
+    <title>Edit Data Rekam Medis</title>
     <!-- Sertakan Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-bmI1jZx7I25zB0wq0TsNuK3InxWYFnbV1KRNp5C9ZVPHR0d4z8jk83QlVt4e53D7rkx2t3YtwUesJx86u4o5Cg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -136,11 +171,11 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>Tambah Data Rekam Medis</h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+        <h2>Edit Data Kunjungan</h2>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?id=' . $id; ?>" method="POST">
             <div class="form-group">
-                <label for="kunjungan_id">Kunjungan</label>
-                <input type="number" id="kunjungan_id" name="kunjungan_id" value="<?php echo $kunjungan_id; ?>">
+                <label for="kunjungan_id">kunjungan_id</label>
+                <input type="int" id="kunjungan_id" name="kunjungan_id" value="<?php echo $kunjungan_id; ?>">
                 <span class="error-message"><?php echo $kunjungan_id_err; ?></span>
             </div>
             <div class="form-group">
@@ -164,8 +199,7 @@
                 <span class="error-message"><?php echo $catatan_err; ?></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn"><i class="fas fa-plus"></i> Tambah Data Rekam Medis</button>
-                <button type="submit" class="btn"><i class="fas fa-plus"></i>Kembali</button>
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Simpan Perubahan</button>
             </div>
         </form>
     </div>
