@@ -78,13 +78,13 @@ $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>" . $row["id_dokter"] . "</td>";
+                    echo "<td>" . $row["id"] . "</td>";
                     echo "<td>" . $row["nama"] . "</td>";
                     echo "<td>" . $row["spesialisasi"] . "</td>"; 
                     echo "<td>" . $row["telepon"] . "</td>";
                     echo "<td>";
-                    echo "<a href='update_dokter.php?id=" . $row["id_dokter"] . "' class='btn btn-edit'>Edit</a> ";
-                    echo "<a href='hapus_dokter.php?id=" . $row["id_dokter"] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'>Hapus</a>";
+                    echo "<a href='update_dokter.php?id=" . $row["id"] . "' class='btn btn-edit'>Edit</a> ";
+                    echo "<a href='hapus_dokter.php?id=" . $row["id"] . "' class='btn btn-delete' onclick='return confirm(\"Apakah Anda yakin ingin menghapus pasien ini?\")'>Hapus</a>";
                     echo "</td>";
                     echo "</tr>";
                 }
