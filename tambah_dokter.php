@@ -1,4 +1,7 @@
 <?php
+include 'config.php';
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Mengambil data dari form
     $nama = $_POST["nama"];
