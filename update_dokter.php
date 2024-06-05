@@ -35,7 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
-
+    //menutup koneksi ke database
+    $conn->close();
+    header("Location: tampil_data_dokter.php");
+    exit();
 }
 ?>
 
